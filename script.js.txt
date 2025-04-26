@@ -1,0 +1,76 @@
+const questions = [
+    {
+        question: "Quando você trabalha em grupo, qual é o seu papel?",
+        answers: ["Criar novas ideias", "Organizar tarefas", "Ajudar as pessoas", "Focar em soluções práticas"],
+        points: [10, 5, 8, 6]
+    },
+    {
+        question: "Como você prefere resolver problemas?",
+        answers: ["Criando soluções criativas", "Analisando dados", "Ajudando os outros", "Colocando a mão na massa"],
+        points: [10, 5, 7, 6]
+    },
+    // Adicione mais perguntas conforme necessário
+];
+
+let currentQuestionIndex = 0;
+let scores = [0, 0, 0, 0]; // Categorias: A, B, C, D
+
+function startTest() {
+    document.querySelector("header").style.display = "none"; // Esconde o cabeçalho
+    document.getElementById("vocational-test").style.display = "block"; // Mostra o teste
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const question = questions[currentQuestionIndex];
+    document.getElementById("question-container").textContent = question.question;
+    const answersContainer = document.getElementById("answers-container");
+    answersContainer.innerHTML = "";
+
+    question.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.onclick = () => handleAnswer(index);
+        answersContainer.appendChild(button);
+    });
+}
+
+function handleAnswer(answerIndex) {
+    const question = questions[currentQuestionIndex];
+    const score = question.points[answerIndex];
+    scores[answerIndex] += score;
+    document.getElementById("next-btn").disabled = false;
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+function showResults() {
+    const maxScoreIndex = scores.indexOf(Math.max(...scores));
+    let resultText = "";
+
+    switch (maxScoreIndex) {
+        case 0:
+            resultText = "Você tem um perfil Criativo e Comunicativo. Profissões sugeridas: Designer, Publicitário.";
+            break;
+        case 1:
+            resultText = "Você tem um perfil Analítico e Investigativo. Profissões sugeridas: Cientista de Dados, Engenheiro.";
+            break;
+        case 2:
+            resultText = "Você tem um perfil Empático e Apoiador. Profissões sugeridas: Psicólogo, Assistente Social.";
+            break;
+        case 3:
+            resultText = "Você tem um perfil Prático e Realista. Profissões sugeridas: Técnico, Mecânico.";
+            break;
+    }
+
+    document.getElementById("result-text").textContent = resultText;
+    document.getElementById("result").style.display = "block";
+    document.getElementById("vocational-test").style.display = "none";
+}

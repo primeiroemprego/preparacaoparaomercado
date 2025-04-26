@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeiro Emprego</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Primeiro Emprego</h1>
+        <p>Seu guia para entrar no mercado de trabalho com confiança.</p>
+        <button onclick="startTest()">Comece o Teste Vocacional</button>
+    </header>
+
+    <section id="vocational-test" style="display:none;">
+        <h2>Teste Vocacional</h2>
+        <div id="question-container"></div>
+        <div id="answers-container"></div>
+        <button id="next-btn" onclick="nextQuestion()" disabled>Próxima</button>
+    </section>
+
+    <section id="result" style="display:none;">
+        <h2>Seu Resultado</h2>
+        <p id="result-text"></p>
+    </section>
+
+    <footer>
+        <p>© 2025 Preparação para o Mercado</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
